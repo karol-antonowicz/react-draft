@@ -30,7 +30,17 @@ function Content() {
 }
 
 function CatName() {
-  return <h1>Puszek</h1>;
+  const a = 1;
+  const b = 3;
+
+  return (
+    <div>
+      <h1>Puszek</h1>
+      <h2>
+        a({a}) + b({b}) = {a + b}
+      </h2>
+    </div>
+  );
 }
 
 const catSrc =
