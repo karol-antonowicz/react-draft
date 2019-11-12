@@ -9,7 +9,12 @@ function App() {
     <div className="App">
       <Hero />
       <Content />
-      <Cat />
+      <Cat
+        name="Puszek"
+        avatarUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvmdG435HxyF0e1DP1IBVos10zTwuNJ0p9M_iYDzlYWup6AgfV6w&s"
+      />
+      <Cat name="Okruszek" />
+      <Cat name="Kulka" />
     </div>
   );
 }
