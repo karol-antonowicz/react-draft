@@ -23,7 +23,13 @@ export const CatImage = props => {
   if (url) {
     return <img src={url} />;
   } else {
-    return null;
+    return (
+      <img
+        src={
+          "https://vignette.wikia.nocookie.net/theislands/images/4/48/Cat_Sil_Placeholder.jpg/revision/latest/scale-to-width-down/300?cb=20140101201417"
+        }
+      />
+    );
   }
 };
 
