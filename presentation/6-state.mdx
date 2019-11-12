@@ -1,0 +1,144 @@
+## Stan w komponentach
+
+zarzadzenie danymi komponentow w nich samych
+
+---
+
+### State vs Props
+
+---
+
+### Komponenty klasowe ze stanem
+
+```jsx
+import React from 'react'
+
+class StateExample extends React.Component {
+  state = {
+    count: 0
+  }
+
+  increment = () => this.setState({ count: this.state.count + 1 })
+
+  decrement = () => this.setState({ count: this.state.count + 1 })
+
+  render() {
+    return <div>
+      <button onClick={decrement}>-1</button>
+      <h1>{this.state.count}</h1>
+      <button onClick={increment}>+1</button>
+    </div>
+  }
+}
+```
+
+---
+
+### Poczatkowy stan w komponentach
+
+#### w konstruktorze
+```jsx
+class StateWithinConstructor extends React.Component () {
+  constructor() {
+    super()
+    this.state = {
+      counter: 0
+    }
+  }
+}
+```
+
+#### jako class property
+```jsx
+class StateWithClassProperty () {
+  state = {
+    counter: 0
+  }
+}
+```
+
+---
+
+### Aktualizacja stanu
+
+stanu nie nalezy modyfikowac bezposrednio
+
+```js
+// ZABRONIONE!!!!
+this.state.counter = this.state.counter + 1
+```
+
+---
+
+#### Wartiant #1
+
+w jaki sposob dziala setState
+
+```js
+this.setState({
+  count: this.state.count + 1
+})
+```
+
+---
+
+#### Wartiant #1
+
+aktualizacja nastepuje asynchronicznie
+
+```js
+console.log(this.state.count)
+this.setState({ count: this.state.count + 1 })
+this.setState({ count: this.state.count + 1 })
+this.setState({ count: this.state.count + 1 })
+this.setState({ count: this.state.count + 1 })
+console.log(this.state.count)
+```
+
+---
+
+#### Wartiant #2 (prevState)
+```js
+this.setState(prevState => {
+  return {
+    count: prevState.count + 1
+  }
+})
+```
+
+---
+
+#### Wartiant #3 (callback (po update'cie stanu))
+```js
+this.setState(prevState => {
+  return {
+    count: prevState.count + 1
+  }
+}, () => console.log(this.state))
+```
+
+---
+
+### Komponenty funkcyjne ze stanem
+
+```jsx
+import React, { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+
+  const increment = () => setCount(count + 1)
+  const decrement = () => setCount(count - 1)
+
+  return <div>
+    <button onClick={decrement}>-1</button>
+    <h1>{count}</h1>
+    <button onClick={increment}>+1</button>
+  </div>
+}
+
+```
+
+---
+
+### State w React DevTools

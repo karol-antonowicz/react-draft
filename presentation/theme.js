@@ -1,0 +1,1 @@
+export { syntaxHighlighterPrism as theme } from "mdx-deck/themes";

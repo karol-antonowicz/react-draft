@@ -1,0 +1,360 @@
+### Formularze w React
+
+- text input
+- select
+- checkbox / radio
+- kontrolowane i niekontrolowane komponenty
+
+---
+
+### Kontrolowane i niekontrolowane elementy
+
+---
+
+#### Niekontrolowane
+
+- tradycyjne elementy podobne do HTML
+- mozemy je odczytywac i zmieniac odwolujac sie bezposrednio do ich referencji
+
+```jsx
+constructor() {
+  this.name = React.createRef()
+}
+
+submitFormHandler = event => {
+  event.preventDefault();
+  
+  console.dir(this.name.current.value); //will give us the name value
+}
+
+render() {
+  return (
+      <div>
+
+        <form onSubmit={this.submitFormHandler}>
+          <div>
+            <input type="text" name="name" ref="name" />
+          </div>
+        </form>
+
+      </div>
+  );
+}
+```
+
+---
+
+#### Kontrolowane
+
+- to my przejmujemy kontrolę nad elementami i decydujemy o wszystkim co zachodzi w komponencie
+- sposob wyswietlania, odczytywania wartosci
+- formularz kontrolowane dostaja wartosci z propsow albo...
+- posiadaja stan okreslajacy wartosc elementu formularza
+- przydaje sie do: walidacji, zmiany elementu na podstawie innego, uzywania okreslonego formatu danych
+
+```js
+class FormComponent extends Component {
+  constructor () {
+    this.state = {
+      email: ''
+    }
+  }
+  
+  changeHandler = event => {
+    this.setState({
+      email: event.target.value
+    });
+  }
+
+  render () {
+    return (
+      <form>
+          <input type="email" 
+                 name="email"   
+                 value={this.state.email} 
+                 onChange={this.changeHandler} 
+          />
+      </form>
+    );        
+  }
+}
+```
+
+---
+
+### Zmiany kilku pól jednoczesnie
+
+Problem
+
+```js
+class FormComponent extends Component {
+  constructor () {
+    this.state = {
+      name: '',
+      email: ''
+    }
+  }
+  
+  changeEmail = event => this.setState({ email: event.target.value })
+
+  changeName = event => this.setState({ name: event.target.value })
+
+  render () {
+    return (
+      <form>
+          <input type="text" 
+                 name="name"   
+                 value={this.state.name} 
+                 onChange={this.changeName} 
+          />
+          <input type="email" 
+                 name="email"   
+                 value={this.state.email} 
+                 onChange={this.changeEmail} 
+          />
+      </form>
+    );        
+  }
+}
+```
+
+---
+
+### Zmiany kilku pól jednoczesnie
+
+Rozwiazanie
+
+```js
+changeHandler = event => {  
+  const name = event.target.name;
+  const value = event.target.value;
+
+  this.setState({
+    formControls: {
+      [name]: value
+    }
+  });
+}
+```
+
+---
+
+### Zmiany kilku pól jednoczesnie
+
+Kiedy chcemy miec wiecej rzeczy okreslajacych nasze pola, a nie tylko wartosc
+
+```jsx
+changeHandler = event => {   
+  const name = event.target.name;
+  const value = event.target.value;
+
+  this.setState({
+    formControls: {
+      ...this.state.formControls,
+      [name]: {
+        ...this.state.formControls[name],
+        value
+      }
+    }
+  });
+}
+```
+
+---
+
+### Tworzenie "generycznego komponentu" `TextInput`
+
+`{...props}` w przykladzie nizej to `spread operator` ktory rozsmarowuje wszystkie propsy na komponencie
+
+```jsx
+import React from 'react';
+import './style.css';
+
+const TextInput = (props) => {
+  return (
+    <div className="form-group">
+      <input type="text" className="form-control" {...props} />
+    </div>
+  );
+}
+
+export default TextInput;
+```
+
+---
+
+### Walidacja formularzy cz. 1
+
+- czym jest valid, touched i validationRules?
+
+```js
+constructor() {
+  super();
+  this.state = {
+    formControls: {
+      name: {
+        value: ''.
+        placeholder: 'Your name',
+        valid: false,
+        touched: false,
+        validationRules: {
+          minLength: 3
+        }
+      }   
+    }
+  }  
+}
+
+```
+
+---
+
+### Walidacja formularzy cz. 2
+
+```js
+changeHandler = event => {
+    
+  const name = event.target.name;
+  const value = event.target.value;
+  
+  const updatedControls = {...this.state.formControls};
+  const updatedFormElement = {...updatedControls[name]};
+
+  updatedFormElement.value = value;
+  updatedFormElement.touched = true;
+  updatedFormElement.valid = validate(value, updatedFormElement.validationRules);
+
+  updatedControls[name] = updatedFormElement;
+
+  this.setState({
+    formControls: updatedControls
+  });
+}
+```
+
+---
+
+### Walidacja formularzy cz. 3
+
+```js
+const validate = (value, rules) => {
+  let isValid = true;
+  
+  for (let rule in rules) {
+    switch (rule) {
+      case 'minLength': isValid = isValid && minLengthValidator(value, rules[rule]); break;
+      
+      default: isValid = true;
+    }
+  }
+  
+  return isValid
+}
+
+const minLengthValidator = (value, minLength) => value.length >= minLength
+
+```
+
+---
+
+### Walidacja formularzy cz. 4
+
+```jsx
+this.state = {
+  //... gdzies w stanie formularza
+  validationRules: {
+    minLength: 3,
+    isRequired: true //just added this
+  }
+}
+```
+
+---
+
+### Walidacja formularzy cz. 5
+
+```js
+const validate = (value, rules) => {
+  let isValid = true
+
+  for (let rule in rules) {  
+    switch (rule) {
+      	case 'minLength': isValid = isValid && minLengthValidator(value, rules[rule]); break;
+        case 'isRequired': isValid = isValid && requiredValidator(value); break;
+      	default: isValid = true;
+    }
+  }
+  
+  return isValid
+}
+
+```
+
+---
+
+### Walidacja formularzy cz. 6
+
+```jsx
+<TextInput name="name" 
+          placeholder={this.state.formControls.name.placeholder}
+          value={this.state.formControls.name.value}
+          onChange={this.changeHandler}
+          touched={this.state.formControls.name.touched}
+          valid={this.state.formControls.name.valid}
+/>
+```
+
+```jsx
+const TextInput = props => {
+  let formControl = "form-control";
+
+  if (props.touched && !props.valid) {
+    formControl = 'form-control control-error';
+  }
+
+  return (
+    <div className="form-group">
+        <input type="text" className={formControl} {...props} />
+    </div>
+  );
+}
+
+```
+
+
+---
+
+### Walidacja formularzy cz. 7
+
+```js
+changeHandler = event => {
+  // ...gdzies w changeHandler
+  let formIsValid = true;
+  for (let name in updatedControls) {
+    formIsValid = updatedControls[name].valid && formIsValid;
+  }
+
+  this.setState({
+    formControls: updatedControls,
+    formIsValid: formIsValid
+  });
+}
+```
+
+```jsx
+<button onClick={this.formSubmitHandler} 
+        disabled={!this.state.formIsValid}
+> 
+  Submit
+</button>
+```
+
+---
+
+### Gotowe rozwiazania problemu formularzy
+
+- [Formik](https://jaredpalmer.com/formik/) - popularna biblioteka do Reactowych formularzy
+- [Yup](https://github.com/jquense/yup) - walidacje za pomoca tzw schemes
+- [validate.js](https://validatejs.org/) - zbior gotowych walidatorow
+
+---

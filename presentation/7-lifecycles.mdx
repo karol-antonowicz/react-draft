@@ -1,0 +1,53 @@
+### Cykl zycia komponentu
+
+---
+
+#### Podstawowe cykle zycia - componentDidMount
+
+```jsx
+// gdzies w klasie!!!
+componentDidMount () {
+  this.interval = setInterval(() => {
+    this.setState({
+      seconds: this.state.seconds + 1
+    })
+  }, 1000)
+}
+```
+
+---
+
+#### Podstawowe cykle zycia - componentWillUnmount
+
+```jsx
+// gdzies w klasie!!!
+componentWillUnmount () {
+  clearInterval(this.interval)
+}
+```
+
+---
+
+Mozna tez za pomoca funkcji
+
+```jsx
+// gdzies w funkcji
+const [seconds, setSeconds] = useState(0)
+useEffect(() => {
+  const interval = setInterval(() => {
+    setSeconds(seconds)
+  }, 1000)
+
+  return () => {
+    clearInterval(interval)
+  }
+}, [])
+```
+
+---
+
+#### Wszystkie cykle zycia komponentu
+
+[Wiecej tutaj](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+---

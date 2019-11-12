@@ -1,0 +1,598 @@
+import { Head, Notes } from 'mdx-deck'
+
+export { theme } from './theme'
+
+<Head>
+  <title>React</title>
+</Head>
+
+# React
+
+---
+
+## Po to tutaj jesteście :)
+
+---
+
+## Krótka historyjka na temat SPA
+
+1. internet dla dokumentów - html
+2. ostylowane dokumenty - html + css
+3. dynamiczne generowanie treści w oparciu o szablony - html + css + serwery
+4. duzo przegladarek, problem z kompatybilnością - w/w + jquery
+5. skomplikowane layouty i dynamiczie treści - SPA
+
+---
+
+## Czym jest SPA (Single Page Application)?
+
+to nie tak, ze aplikacja ma jeden widok. SPA to:
+
+- nawigacja na stronie nastepuje bez przeladowania strony
+- wszystkie zasoby sa sciagane przy pierwszym zapytaniu
+- dynamiczie doladowanie zasobow potrzebnych na stronie za pomoca AJAX'a
+
+---
+
+## Zalety SPA
+
+- lepszy UX
+- szybkie dzialanie
+- mniejsze obciazenie serwerow
+- przerzucenie odpowiedzialnosci na klienta
+
+---
+
+## Czym jest React?
+
+![but-why](data:image/jpeg;base64,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)
+
+---
+
+## Czym jest React?
+
+- biblioteka do tworzenia dynamicznych widoków
+- biblioteka do tworzeia komponentow
+- świetnie nadaje się do aplikacji typu SPA
+
+---
+
+## Historia Reacta
+
+- stworzony przez Facebooka
+- wydany w 2013 roku
+- 2013 - 2017 licencja [BSD](https://medium.freecodecamp.org/facebook-just-changed-the-license-on-react-heres-a-2-minute-explanation-why-5878478913b2)
+  (Berkeley Software Distribution Licenses)
+- w 2017 poprawki licencyjne [MIT](https://opensource.org/licenses/MIT)
+- [więcej o licencjach](https://choosealicense.com/)
+
+---
+
+## Hello World w React w 4 krokach
+
+---
+
+### 1. Tworzymy kontenter w htmlu. Np.:
+
+```html
+<div id="whatever"></div>
+```
+
+---
+
+### 2. Podpinamy skrypty do Reacta
+
+```html
+<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+<!-- Load our React component. -->
+<script src="like_button.js"></script>
+```
+
+---
+
+### 3. Tworzymy Reactowy komponent
+
+```jsx
+const LikeButton = () => {
+  return React.createElement('button', {
+    onClick: () => alert('You liked this post')
+  }, 'Like + 1')
+}
+```
+
+---
+
+### 4. Dolaczamy go do strony
+
+```js
+const domContainer = document.querySelector('#whatever');
+ReactDOM.render(React.createElement(LikeButton), domContainer);
+```
+
+---
+
+## Okej, ale jak to działa?
+
+- podejście komponentowe
+- Virtual DOM
+- za nas modyfikuje DOM
+
+---
+
+## Za nas modyfikuje DOM
+
+![WAT](https://i.kym-cdn.com/photos/images/newsfeed/000/173/576/Wat8.jpg?1315930535)
+
+---
+
+## Najpierw przypomnijmy sobie czym wgl jest DOM
+
+![DOM](https://cdncontribute.geeksforgeeks.org/wp-content/uploads/DOM.png)
+
+---
+
+## No to czym jest Virtual DOM?
+
+abstrakcja abstrakcji...
+
+...w celu optymalizacji
+
+---
+
+![compare](https://i.stack.imgur.com/S1vng.png)
+
+---
+
+## Jak wygląda React?
+
+```js
+React.createElement('h1', null, 'Hello World!')
+```
+
+---
+
+## Bardziej zaawansowany przykład
+
+```js
+React.createElement('div', { className: 'container'},
+  React.createElement('header', null
+    React.createElement('nav', null,
+      // React.createElement()
+    )
+  ),
+  React.createElement('main', { className: 'container'}
+    React.createElement('article', null,
+      React.createElement('p', null, 'lorem ipsum...'),
+      React.createElement('p', null, 'lorem ipsum...'),
+      React.createElement('p', null, 'lorem ipsum...')
+    )
+  ),
+  React.createElement('footer', null
+    // React.createElement()
+  )
+)
+```
+
+---
+
+## W HTML-u było prościej
+
+```html
+<div class="container">
+  <header>
+    <nav>
+      <!-- ... -->
+    </nav>
+  </header>
+  <main class="container">
+    <article>
+      <p>lorem ipsum...</p>
+      <p>lorem ipsum...</p>
+      <p>lorem ipsum...</p>
+    </article>
+  </main>
+  <footer>
+    <!-- ... -->
+  </footer>
+</div>
+```
+
+---
+
+## JSX
+
+na ratunek składni
+
+---
+
+## Składnia JSX
+
+```jsx
+<div className="container">
+  <header>
+    <nav>
+      <!-- ... -->
+    </nav>
+  </header>
+  <main className="container">
+    <article>
+      <p>lorem ipsum...</p>
+      <p>lorem ipsum...</p>
+      <p>lorem ipsum...</p>
+    </article>
+  </main>
+  <footer>
+    <!-- ... -->
+  </footer>
+</div>
+```
+
+---
+
+### Jak uzywac składni JSX?
+
+```js
+import React from 'react'
+```
+
+---
+
+## Renderery
+
+Czyli jak wystartować Reactową aplikacje w danym środowisku?
+
+---
+
+### ReactDOM - podstawowy renderer
+
+---
+
+```jsx
+ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'))
+```
+
+---
+
+### Inne renderery
+
+- [react-native](https://facebook.github.io/react-native/) - renderer natywny
+- [react-canvas](https://github.com/Flipboard/react-canvas) - renderer dla canvas
+- [proton-native](https://github.com/kusti8/proton-native) - renderer dla desktop
+- [ink](https://github.com/vadimdemedes/ink) - renderer dla CLI
+- [oy](https://github.com/revivek/oy) - renderer dla szablonow mailowych
+- [react-tv](https://github.com/raphamorim/react-tv) - renderer dla TV
+- [i wiele, wiele wiecej](https://github.com/chentsulin/awesome-react-renderer)
+
+---
+
+## Komponenty
+
+nowa era tworzenia interfejsów
+
+---
+
+## Czym jest komponent?
+
+---
+
+![lego-atoms](https://cdn-images-1.medium.com/max/1600/1*AG3pvj8-DDxsK5xtXf9EgA.jpeg)
+
+---
+
+![lego-molecules](https://www.lego.com/r/www/r/catalogs/-/media/catalogs/activities/classic/building%20instructions/2019/11001_bi_1hy19_touts_house.jpg?l.r=-1724507319)
+
+---
+
+![lego-building](https://www.lego.com/r/www/r/catalogs/-/media/catalogs/activities/classic/building%20instructions/2018/10717/10717_classic_house.jpg?l.r=-965916097)
+
+---
+
+![lego-building-big](https://sh-s7-live-s.legocdn.com/is/image/LEGO/10264?scl=1.7&op_sharpen=1)
+
+---
+
+![lego-building-bigger](https://i.ytimg.com/vi/023HblSu07A/maxresdefault.jpg)
+
+---
+
+![legoland](https://www.legolandholidays.de/dam/jcr:6002f7d4-ce14-4984-98b4-edfa88aa781b/LLD_Pirate_Island_2018_Drohne.jpg)
+
+---
+
+![electronic-components](https://www.tempoautomation.com/wp-content/uploads/2018/05/shutterstock_175375409-673x381.jpg)
+
+---
+
+![electronic-transistors](https://www.build-electronic-circuits.com/wp-content/uploads/2014/10/Three_IC_circuit_chips-Public-Domain-1024x832.jpg)
+
+---
+
+![electronic-processor](https://yalu.pl/48880-thickbox_default/procesor-intel-core-i9-9900x-x-series-1925m-cache-350-ghz.jpg)
+
+---
+
+![computer-components](https://i2.wp.com/wifinotes.com/wp-content/uploads/2015/03/types-of-computer-hardware.png?fit=400%2C341)
+
+---
+
+![computer](https://images10.newegg.com/ProductImage/83-102-519-Z01.jpg)
+
+---
+
+![servers](https://sophos.files.wordpress.com/2018/06/shutterstock_495697993.jpg?w=640)
+
+---
+
+## Jak stworzyć komponent w React?
+
+- funkcja
+- klasa
+
+---
+
+## Komponent funckja
+
+```jsx
+function App() {
+  return React.createElement('h1', null, 'Hello world!')
+}
+```
+
+```jsx
+const App = () => React.createElement('h1', null, 'Hello world!')
+```
+
+```jsx
+const element = React.createElement(App)
+```
+
+---
+
+## Komponent funkcja
+
+Mozna lepiej
+
+```jsx
+function App() {
+  return <h1>Hello world!</h1>
+}
+```
+
+```jsx
+const App = () => <h1>Hello world!</h1>
+```
+
+```jsx
+const element = <App />
+```
+
+---
+
+## Prosta kompozycja komponentow
+
+```jsx
+const Name = () => <h1>Jan Nowak</h1>
+
+const Phone = () => <p>+48 123 456 789</p>
+
+const Card = () => {
+  return (
+    <div>
+      <Name />
+      <Phone />
+    </div>
+  )
+}
+```
+
+---
+
+## Zadanie 1
+
+Stworz 3 Reactowe komponenty:
+- `CatImage` - ktory bedzie wyswietlal obrazek kota
+- `CatName` - ktory bedzie wyswietlal nazwe kota
+- `Cat` - ktory bedzie wyswietlal obrazek i nazwe kota 1 pod 2.
+
+---
+
+## JSX - wyrazenia
+
+(ang. expressions)
+
+- w JS to co jest po `=` to wyrazenie np. `var x = 2 + 7` (wyrazenie to `2 + 7`)
+- nawiasy kramrowe w ponizszym przykladzie to nie jest obiekt ani blok
+- to co jest w nawiasach klamrowych to zwykle wyrazenie JSowe
+
+```jsx
+{1 + 1}
+```
+
+```jsx
+{'Hello world!'}
+```
+
+---
+
+## JSX - wyrazenia
+
+wyrazenie mozna osadzac w komponentach Reactowych np.:
+
+```jsx
+<h1>{1+1}</h1>
+```
+
+```jsx
+<h1>{'Hello world!'}</h1>
+```
+
+---
+
+## Zadanie 2
+
+- w dowolnym komponencie Reactowym stworz dwie zmienne `const a = 4` oraz `const b = 5`
+- skorzystaj z Reactowego wyrazenia (klamerek), aby dodac te dwie zmienne do siebie
+- wyswietl wynik w elemencie `<h2>`
+
+
+---
+
+## Propsy
+
+Metoda na parametryzowanie komponentów
+
+```jsx
+function NazwaKomponentu (props) {
+  // props to obiekt, ktory zawiera dane, z ktorych korzysta komponent
+  return <div>
+    {props.name}
+  </div>
+}
+```
+
+---
+
+## Propsy
+
+```jsx
+const Greeting = props => {
+  return <h1>{props.title}</h1>
+}
+
+const element = <Greeting title='Goodbye cruel world!' />
+```
+
+---
+
+Inny przyklad
+
+```jsx
+const Name = (props) => <h1>{props.name}</h1>
+
+const Phone = (props) => <p>{props.phone}</p>
+
+const Card = () => {
+  return (
+    <div>
+      <Name name={'Jan Nowak'}/>
+      <Phone phone={'+48 123 456 789'}/>
+    </div>
+  )
+}
+```
+
+---
+
+## Zadanie 3
+
+Sparametryzuj komponenty `CatImage` oraz `CatName` tak, aby pobieraly zrodlo obrazka i imie kota
+
+---
+
+## Wiecej JSXa
+
+```jsx
+const firstName = 'Kacper'
+const isLoaded = false
+<div>{isLoaded ? 'Hello ' + firstName + ' !' : <Loader />}</div>
+```
+
+---
+
+## JSX - nie renderujemy nic
+
+```jsx
+const firstName = 'Kacper'
+const isHidden = true
+<div>{isHidden ? null : 'Hello ' + firstName + '!'}</div>
+```
+
+---
+
+## JSX - nazewnictwo
+
+- camelCase - propsy `className`
+- startCase - nazwy komponentów `Loader` `NavBar`
+
+---
+
+## Przyklad komponentu klasowego
+
+```jsx
+import React from 'react'
+
+class Greeting extends React.Component {
+  render() {
+    return <h1>{this.props.title}</h1>
+  }
+}
+```
+
+mozna tez funkcyjnie
+
+```jsx
+function Greeting (props) {
+  return <h1>{props.title}</h1>
+}
+```
+
+---
+
+## Klasy - Stare podejście
+
+warto wiedziec, ze jest, ale nie warto zapamietywac
+
+```jsx
+const OldComponent = React.createClass({
+  render() {
+    return <h1>My good old component</h1>
+  }
+})
+```
+
+---
+
+### Do klas jeszcze wrocimy :)
+
+---
+
+### React Developer Tools
+
+[kliknij i zainstaluj](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+
+---
+
+## Zbudujmy cos!
+
+[create-react-app](https://github.com/facebook/create-react-app)
+
+---
+
+## Stylowanie komponentów
+
+---
+
+### Małe przypomnienie o webpacku
+
+- `import cssów`
+- `import zdjec, czcionek, plikow`
+
+---
+
+### (Nie)zwykłe dodawanie cssów
+
+```jsx
+import './Button.css'
+```
+
+---
+
+### CSS modules
+
+```jsx
+import styles from './Button.module.css'
+```
+

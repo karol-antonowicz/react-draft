@@ -1,0 +1,96 @@
+### Obsluga zdarzen
+
+---
+
+#### Krok #1 
+
+ustalenie na jakie zdarzenie chcemy zareagowac np `onClick`:
+
+```jsx
+// jeszcze puste
+<div onClick={}>
+  Kliknij tutaj!
+</div>
+```
+
+---
+
+#### Krok #2
+
+definiowanie metody, ktora wykona sie na zdarzenie np `handleClick`:
+
+```jsx
+const handleClick = () => console.log('Zostalem klikniety!')
+```
+
+---
+
+#### Krok #3
+
+przekazywanie metody `handleClick` do propsa `onClick`
+
+```jsx
+<div onClick={handleClick}>
+  Kliknij tutaj!
+</div>
+```
+
+---
+
+#### Krok #4
+
+modyfikowanie stanu aplikacji na zdarzenia
+
+```jsx
+const [count, setCount] = useState(0)
+
+const handleClick = () => setCount(count + 1)
+```
+
+---
+
+### bindowanie metod z komponentem
+
+w konstruktorze
+
+```jsx
+class BindMethodExample extends React.Component {
+  constructor() {
+    super()
+    this.state.count = {
+      0
+    }
+    this.increment = this.increment.bind(this)
+    // i tak dla kazdej metody, ktora stworzymy w BindMethodExample
+  }
+
+  increment () {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+}
+```
+
+---
+
+### bindowanie metod z komponentem
+
+za pomoca arrow function
+
+```jsx
+class BindMethodExample extends React.Component {
+  constructor() {
+    super()
+    this.state.count = {
+      0
+    }
+  }
+
+  increment = () => {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+}
+```

@@ -1,0 +1,195 @@
+## Routing
+
+---
+
+### Czym jest Routing?
+
+- wyświetlanie elementow w zaleznosci od sciezki jaka wyswietla uzytkownik
+- scieza to ta czesc urla, ktora zaczyna sie po "/"
+
+---
+
+![url-parts](https://doepud.co.uk/images/blogs/complex_url.png)
+
+---
+
+### react-router
+
+```jsx
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+;<Router>
+  <div>
+    <Route exact path='/' component={<Home />} />
+    <Route exact path='/about' component={<About />} />
+    <Route exact path='/contact' component={<Contact />} />
+  </div>
+</Router>
+```
+
+---
+
+### Rodzaje routerow
+
+1. BrowserRouter - HTML5 history API
+2. HashRouter - uzywa window.location.hash
+3. MemoryRouter - uzywa URL, ale w pamieci komputera
+
+---
+
+### Jak router dobiera komponent?
+
+```jsx
+<Route path="/" component={<Home />} />
+<Route path="/about" component={<About />} />
+```
+
+oba komponenty maja w członie "/", ktora wybrac?
+
+- react wybierze pierwsza sciezke
+- chyba, ze mamy `exact`
+
+---
+
+### Route
+
+exact, strict, sensitive
+
+---
+
+### Router params
+
+```jsx
+<Route path='/users/:id' component={<UserProfile />} />
+```
+
+```js
+props.match.params.id
+```
+
+---
+
+### Switch
+
+bez switcha
+
+```jsx
+<Route path="/about" component={About}/>
+<Route path="/:user" component={User}/>
+<Route component={NoMatch}/>
+```
+
+ze switchem
+
+```js
+<Switch>
+  <Route exact path='/' component={Home} />
+  <Route path='/about' component={About} />
+  <Route path='/:user' component={User} />
+  <Route component={NoMatch} />
+</Switch>
+```
+
+---
+
+### Redirect
+
+<Redirect from="/old-page" to="/new-page" />
+<Route path="/new-page" component={<NewPage />} />
+
+---
+
+### Obiekt history
+
+zerknijmy w react developer tools
+
+---
+
+### Obiekt location
+
+```js
+{
+  key: 'ac3df4', // not with HashHistory!
+  pathname: '/somewhere'
+  search: '?some=search-string',
+  hash: '#howdy',
+  state: {
+    [userDefined]: true
+  }
+}
+```
+
+---
+
+### Obiekt match
+
+```js
+{
+  params: {
+    id: 12345
+  },
+  isExact: true,
+  path: "/users/:id",
+  url:
+}
+```
+
+---
+
+### Nawigacja
+
+```jsx
+;<Link to={location} />
+// lub
+history.push(location)
+// lub
+history.replace(location)
+```
+
+---
+
+### Link vs NavLink
+
+---
+
+### HOF / HOC
+
+```jsx
+const add = a => b => a + b
+
+const Hello1 = props => <h1>{props.message}</h1>
+const Hello2 = props => <h1>{props.message}</h1>
+
+const withMessage = message => Component => <Component message={message} />
+
+const ComponentWithMessage = withMessage('Goodbye!')(Hello2)
+const ComponentWithRouter = withRouter(Logo)
+```
+
+---
+
+### withRouter - dostęp poza Route
+
+```jsx
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
+
+class ShowTheLocation extends React.Component {
+  render() {
+    const { match, location, history } = this.props
+
+    return <div>You are now at {location.pathname}</div>
+  }
+}
+
+// Tworzymy nowy komponent, ktory jest "podlaczony" do starego
+const ShowTheLocationWithRouter = withRouter(ShowTheLocation)
+```
+
+---
+
+### Dorzucenie kolejnego routingu - TodoMVC
+
+---
+
+### zagniezdzony routing

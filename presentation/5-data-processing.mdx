@@ -1,0 +1,20 @@
+### Iterowanie i renderowanie elementów
+
+```jsx
+const arr = [1, 2, 3]
+
+<ul>
+  {arr.map(element => <li>{element}</li>)}
+</ul>
+```
+
+---
+
+#### Zerknijmy w konsolę
+
+---
+
+#### `Key` - Fix błędu
+
+- znajdz rozroznialny indentyfikator i umiesc w prop `key`
+- w najgorszym przypadku moze to byc index elementu po ktorym iterujemy
