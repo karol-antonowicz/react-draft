@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "react-presentation",
+  "name": "jfdd13-react",
   "version": "1.0.0",
   "scripts": {
     "start": "mdx-deck deck.js",
