@@ -33,10 +33,11 @@ function CatName() {
   return <h1>Puszek</h1>;
 }
 
+const catSrc =
+  "https://www.thesprucepets.com/thmb/jbD_0GJnIVGmnLve7QDe9hCDbPU=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/Stocksy_txp33a24e10lxw100_Medium_214761-5af9d6d7875db900360440a7.jpg";
+
 const CatImage = () => {
-  return (
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiBjnCHmg6X7YGEZ4vY_sYT1bcYtwzFYDFujnWyyOhCmzuV_421w&s" />
-  );
+  return <img src={catSrc} />;
 };
 
 const showName = true;
