@@ -36,6 +36,7 @@ const Root = () => {
               );
             }}
           />
+          <Route component={() => <h1>404 - sadface</h1>} />
         </Switch>
       </div>
     </Router>
