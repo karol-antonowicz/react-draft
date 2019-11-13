@@ -9,36 +9,17 @@ class Navbar extends React.Component {
         <h2 className={styles.logo}>Logo tutaj (kiedys)</h2>
         <ul className={styles.links}>
           <li>
-            <NavLink
-              activeStyle={{
-                color: "gold",
-                textDecoration: "none"
-              }}
-              to="/"
-              exact
-            >
+            <NavLink activeClassName={"active-link"} to="/" exact>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              activeStyle={{
-                color: "gold",
-                textDecoration: "none"
-              }}
-              to="/users/1"
-            >
+            <NavLink activeClassName={"active-link"} to="/users/1">
               First user
             </NavLink>
           </li>
           <li>
-            <NavLink
-              activeStyle={{
-                color: "gold",
-                textDecoration: "none"
-              }}
-              to="/asdadasd"
-            >
+            <NavLink activeClassName={"active-link"} to="/asdadasd">
               404
             </NavLink>
           </li>
