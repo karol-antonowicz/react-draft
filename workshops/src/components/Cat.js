@@ -1,4 +1,6 @@
 import React from "react";
+import styles from "./Cat.module.css";
+import Counter from "./Counter";
 
 export function CatName(props) {
   const a = 1;
@@ -25,6 +27,7 @@ export const CatImage = props => {
   } else {
     return (
       <img
+        className={styles.catImage}
         src={
           "https://vignette.wikia.nocookie.net/theislands/images/4/48/Cat_Sil_Placeholder.jpg/revision/latest/scale-to-width-down/300?cb=20140101201417"
         }
@@ -36,7 +39,7 @@ export const CatImage = props => {
 const showName = true;
 
 const Cat = props => (
-  <div>
+  <div className={styles.card}>
     <CatImage url={props.avatarUrl} />
     <Counter />
     {showName && <CatName nameOfCat={props.name} />}
