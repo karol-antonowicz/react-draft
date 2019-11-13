@@ -7,12 +7,13 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import Navbar from "./components/Navbar";
+import UserDetails from "./components/UserDetails";
 
 const Root = () => {
   return (
     <Router>
-      <Navbar />
       <div>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={App} />
           <Redirect exact from="/abc" to="/" />
@@ -20,13 +21,7 @@ const Root = () => {
           <Route exact path="/abc/" component={() => <h1>/abc/</h1>} />
           <Route exact path="/ABC/" component={() => <h1>/ABC/</h1>} />
           <Route exact path="/abc/def" component={() => <h1>ABC/DEF</h1>} />
-          <Route
-            path="/users/:id"
-            component={props => {
-              console.log(props.match.params.id);
-              return <h1>Users {props.match.params.id}</h1>;
-            }}
-          />
+          <Route path="/users/:id" component={UserDetails} />
           <Route
             path="/users/:id/:name"
             component={props => {
