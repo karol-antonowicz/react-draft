@@ -38,6 +38,7 @@ const showName = true;
 const Cat = props => (
   <div>
     <CatImage url={props.avatarUrl} />
+    <Counter />
     {showName && <CatName nameOfCat={props.name} />}
   </div>
 );
