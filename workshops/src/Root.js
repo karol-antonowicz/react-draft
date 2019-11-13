@@ -6,11 +6,12 @@ import {
   Redirect
 } from "react-router-dom";
 import App from "./App";
+import Navbar from "./components/Navbar";
 
 const Root = () => {
   return (
     <Router>
-      <h1>NAVBAR</h1>
+      <Navbar />
       <div>
         <Switch>
           <Route exact path="/" component={App} />

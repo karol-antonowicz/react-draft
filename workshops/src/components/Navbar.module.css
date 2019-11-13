@@ -1,0 +1,19 @@
+.navbar {
+  background: lightblue;
+}
+
+.logo {
+  margin: 0;
+  display: inline;
+}
+
+.links {
+  display: inline;
+  float: right;
+  margin: 0;
+}
+
+.links > li {
+  display: inline;
+  padding: 5px;
+}
