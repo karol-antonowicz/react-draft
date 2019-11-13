@@ -10,6 +10,7 @@ import App from "./App";
 const Root = () => {
   return (
     <Router>
+      <h1>NAVBAR</h1>
       <div>
         <Switch>
           <Route exact path="/" component={App} />
@@ -38,6 +39,7 @@ const Root = () => {
           />
           <Route component={() => <h1>404 - sadface</h1>} />
         </Switch>
+        <h1>FOOTER</h1>
       </div>
     </Router>
   );
