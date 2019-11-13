@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../logo.svg";
+import Counter from "./Counter";
 
 function Hero() {
   return (
@@ -16,6 +17,7 @@ function Hero() {
       >
         Learn React
       </a>
+      <Counter />
     </header>
   );
 }
