@@ -41,11 +41,13 @@ const Controls = () => {
   );
 };
 
-const TodoItem = () => {
+const TodoItem = props => {
+  const { isDone, label } = props;
+
   return (
-    <li className={styles.completed}>
+    <li className={isDone ? styles.completed : ""}>
       <div className={styles.view}>
-        <input className={styles.toggle} type="checkbox" checked />
+        <input className={styles.toggle} type="checkbox" checked={isDone} />
         <label>Taste JavaScript</label>
         <button className={styles.destroy}></button>
       </div>
@@ -57,9 +59,9 @@ const TodoItem = () => {
 const TodoList = () => {
   return (
     <ul className={styles.todoList}>
-      <TodoItem />
-      <TodoItem />
-      <TodoItem />
+      <TodoItem isDone={true} label={"Finish components extraction"} />
+      <TodoItem isDone={false} label={"Attach logic"} />
+      <TodoItem isDone={false} label={"Finish Todo App"} />
     </ul>
   );
 };
