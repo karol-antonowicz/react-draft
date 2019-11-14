@@ -48,7 +48,7 @@ const TodoItem = props => {
     <li className={isDone ? styles.completed : ""}>
       <div className={styles.view}>
         <input className={styles.toggle} type="checkbox" checked={isDone} />
-        <label>Taste JavaScript</label>
+        <label>{label}</label>
         <button className={styles.destroy}></button>
       </div>
       <input className={styles.edit} value="Create a TodoMVC template" />
