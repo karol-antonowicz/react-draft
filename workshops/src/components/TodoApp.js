@@ -9,6 +9,10 @@ const Counter = () => {
   );
 };
 
+const Clear = () => {
+  return <button className={styles.clearCompleted}>Clear completed</button>;
+};
+
 const TodoApp = () => {
   return (
     <div>
@@ -61,7 +65,7 @@ const TodoApp = () => {
               <a href="#/completed">Completed</a>
             </li>
           </ul>
-          <button className={styles.clearCompleted}>Clear completed</button>
+          <Clear />
         </footer>
       </section>
       <footer className={styles.info}>
