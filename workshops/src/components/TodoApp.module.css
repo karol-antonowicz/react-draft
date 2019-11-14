@@ -112,7 +112,7 @@ button {
 .toggleAll + label:before {
   content: "❯";
   font-size: 22px;
-  color: #e6e6e6;
+  color: #2f0808;
   padding: 10px 27px 10px 27px;
 }
 
