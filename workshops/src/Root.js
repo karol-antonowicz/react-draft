@@ -8,6 +8,7 @@ import {
 import App from "./App";
 import Navbar from "./components/Navbar";
 import UserDetails from "./components/UserDetails";
+import TodoApp from "./components/TodoApp";
 
 const Root = () => {
   return (
@@ -15,7 +16,8 @@ const Root = () => {
       <div>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact strict sensitive path="/" component={App} />
+          <Route path="/todo-app" component={TodoApp} />
           <Redirect exact from="/abc" to="/" />
           <Route exact path="/abc" component={() => <h1>/abc</h1>} />
           <Route exact path="/abc/" component={() => <h1>/abc/</h1>} />
