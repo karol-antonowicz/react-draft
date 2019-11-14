@@ -1,11 +1,19 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import logo from "../logo.svg";
 import Counter from "./Counter";
 
-function Hero() {
+export function Hero(props) {
   return (
     <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
+      <img
+        src={logo}
+        className="App-logo"
+        alt="logo"
+        onClick={() => {
+          props.history.push("/asdasdasdad");
+        }}
+      />
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
@@ -22,4 +30,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default withRouter(Hero);
