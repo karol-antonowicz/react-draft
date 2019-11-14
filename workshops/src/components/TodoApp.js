@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import uuid from "uuid";
 import styles from "./TodoApp.module.css";
 
 const Counter = () => {
@@ -57,11 +58,34 @@ const TodoItem = props => {
 };
 
 const TodoList = () => {
+  const todos = [
+    {
+      id: uuid.v4(),
+      isDone: true,
+      label: "Finish components extraction"
+    },
+    {
+      id: uuid.v4(),
+      isDone: true,
+      label: "a"
+    },
+    {
+      id: uuid.v4(),
+      isDone: true,
+      label: "b"
+    },
+    {
+      id: uuid.v4(),
+      isDone: true,
+      label: "Finish components extraction"
+    }
+  ];
+
   return (
     <ul className={styles.todoList}>
-      <TodoItem isDone={true} label={"Finish components extraction"} />
-      <TodoItem isDone={false} label={"Attach logic"} />
-      <TodoItem isDone={false} label={"Finish Todo App"} />
+      {todos.map(todo => (
+        <TodoItem key={todo.id} isDone={todo.isDone} label={todo.label} />
+      ))}
     </ul>
   );
 };
