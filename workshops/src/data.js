@@ -1,4 +1,4 @@
-const albums = [
+export const albums = [
   {
     id: 0,
     name: "Rodzinne",
@@ -6,7 +6,7 @@ const albums = [
   }
 ];
 
-const photos = [
+export const photos = [
   {
     id: 0,
     desc: "Zdjecie z wakacji",
