@@ -68,13 +68,7 @@ const TodoList = props => {
   return (
     <ul className={styles.todoList}>
       {props.todos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id}
-          isDone={todo.isDone}
-          label={todo.label}
-          onDeleteTodo={props.onDeleteTodo}
-        />
+        <TodoItem key={todo.id} {...todo} onDeleteTodo={props.onDeleteTodo} />
       ))}
     </ul>
   );
