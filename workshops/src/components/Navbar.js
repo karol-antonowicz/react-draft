@@ -29,8 +29,8 @@ class Navbar extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName={"active-link"} to="/asdadasd">
-              404
+            <NavLink activeClassName={"active-link"} to="/accounts/">
+              Create an account
             </NavLink>
           </li>
         </ul>
