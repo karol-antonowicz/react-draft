@@ -51,6 +51,7 @@ class FormExample extends React.Component {
           value={this.state.form.email}
           type="email"
           name="email"
+          error
         />
       </form>
     );
