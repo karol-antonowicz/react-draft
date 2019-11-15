@@ -16,3 +16,7 @@ code {
   color: gold;
   text-decoration: none;
 }
+
+.my-form input {
+  display: block;
+}

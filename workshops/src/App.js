@@ -3,11 +3,13 @@ import "./App.css";
 import Hero from "./components/Hero";
 import Cat from "./components/Cat";
 import { Content } from "./components/Content";
+import FormExample from "./components/FormExample";
 
 function App() {
   return (
     <div className="App">
       <Hero />
+      <FormExample />
       <Content />
       <Cat
         name="Puszek"
