@@ -35,7 +35,7 @@ export const photos = [
 export const todos = [
   {
     id: uuid.v4(),
-    isDone: true,
+    isDone: false,
     label: "Finish components extraction"
   },
   {
