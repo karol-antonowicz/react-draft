@@ -1,11 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
+import { Input } from "semantic-ui-react";
 
 const TextInput = props => {
   const { name, errors, touched } = props;
   return (
     <div>
-      <input {...props} />
+      <Input {...props} error={errors[name] && touched[name]} />
       <div>{errors[name] && touched[name] && errors[name]}</div>
     </div>
   );
