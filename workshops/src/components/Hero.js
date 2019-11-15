@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../logo.svg";
-import Counter from "./Counter";
+import Clock from "./Clock";
 import withHelloWorld from "../hocs/withHelloWorld";
 
 export function Hero(props) {
@@ -26,7 +26,7 @@ export function Hero(props) {
       >
         Learn React
       </a>
-      <Counter />
+      <Clock />
     </header>
   );
 }
