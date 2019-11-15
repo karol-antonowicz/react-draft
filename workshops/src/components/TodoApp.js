@@ -119,7 +119,7 @@ class TodoApp extends React.Component {
   };
 
   componentDidMount() {
-    const todos = JSON.parse(localStorage.getItem("todos"));
+    const todos = JSON.parse(localStorage.getItem("todos")) || [];
     this.setState({
       todos
     });
