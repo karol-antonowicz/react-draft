@@ -1,4 +1,14 @@
 import React from "react";
+import { Input } from "semantic-ui-react";
+
+const TextInput = props => {
+  return (
+    <div>
+      <label htmlFor={props.name}>{props.name}</label>
+      <Input name={props.name} {...props} />
+    </div>
+  );
+};
 
 class FormExample extends React.Component {
   state = {
@@ -24,19 +34,19 @@ class FormExample extends React.Component {
   render() {
     return (
       <form className={"my-form"}>
-        <input
+        <TextInput
           onChange={this.changeHandler}
           value={this.state.form.firstName}
           type="text"
           name="firstName"
         />
-        <input
+        <TextInput
           onChange={this.changeHandler}
           value={this.state.form.lastName}
           type="text"
           name="lastName"
         />
-        <input
+        <TextInput
           onChange={this.changeHandler}
           value={this.state.form.email}
           type="email"
