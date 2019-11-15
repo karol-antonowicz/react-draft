@@ -115,6 +115,17 @@ class TodoApp extends React.Component {
     newTodoValue: "Buy milk"
   };
 
+  componentDidMount() {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    this.setState({
+      todos
+    });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  }
+
   get todosLeft() {
     return this.state.todos.filter(todo => todo.isDone === false).length;
   }
