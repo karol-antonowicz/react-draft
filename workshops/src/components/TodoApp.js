@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import uuid from "uuid";
 import styles from "./TodoApp.module.css";
+import { todos } from "../data";
 
 const Counter = () => {
   return (
@@ -58,29 +58,6 @@ const TodoItem = props => {
 };
 
 const TodoList = () => {
-  const todos = [
-    {
-      id: uuid.v4(),
-      isDone: true,
-      label: "Finish components extraction"
-    },
-    {
-      id: uuid.v4(),
-      isDone: true,
-      label: "a"
-    },
-    {
-      id: uuid.v4(),
-      isDone: true,
-      label: "b"
-    },
-    {
-      id: uuid.v4(),
-      isDone: true,
-      label: "Finish components extraction"
-    }
-  ];
-
   return (
     <ul className={styles.todoList}>
       {todos.map(todo => (
@@ -109,34 +86,45 @@ const ToggleAll = () => {
   );
 };
 
-const TodoApp = () => {
-  return (
-    <div>
-      <section className={styles.todoapp}>
-        <header className={styles.header}>
-          <h1>todos</h1>
-          <TodoInput />
-        </header>
-        <section className={styles.main}>
-          <ToggleAll />
-          <TodoList />
+class TodoApp extends React.Component {
+  state = {
+    todos,
+    selectedFilter: "all",
+    newTodoValue: ""
+  };
+
+  // isClearVisible
+  // todosLeft
+
+  render() {
+    return (
+      <div>
+        <section className={styles.todoapp}>
+          <header className={styles.header}>
+            <h1>todos</h1>
+            <TodoInput />
+          </header>
+          <section className={styles.main}>
+            <ToggleAll />
+            <TodoList />
+          </section>
+          <Controls />
         </section>
-        <Controls />
-      </section>
-      <footer className={styles.info}>
-        <p>Double-click to edit a todo</p>
-        <p>
-          Template by <a href="http://sindresorhus.com">Sindre Sorhus</a>
-        </p>
-        <p>
-          Created by <a href="http://todomvc.com">you</a>
-        </p>
-        <p>
-          Part of <a href="http://todomvc.com">TodoMVC</a>
-        </p>
-      </footer>
-    </div>
-  );
-};
+        <footer className={styles.info}>
+          <p>Double-click to edit a todo</p>
+          <p>
+            Template by <a href="http://sindresorhus.com">Sindre Sorhus</a>
+          </p>
+          <p>
+            Created by <a href="http://todomvc.com">you</a>
+          </p>
+          <p>
+            Part of <a href="http://todomvc.com">TodoMVC</a>
+          </p>
+        </footer>
+      </div>
+    );
+  }
+}
 
 export default TodoApp;

@@ -1,3 +1,5 @@
+import uuid from "uuid";
+
 export const albums = [
   {
     id: 0,
@@ -27,5 +29,28 @@ export const photos = [
     date: "01-12-2002",
     image:
       "https://images.pexels.com/photos/3014019/pexels-photo-3014019.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  }
+];
+
+export const todos = [
+  {
+    id: uuid.v4(),
+    isDone: true,
+    label: "Finish components extraction"
+  },
+  {
+    id: uuid.v4(),
+    isDone: true,
+    label: "a"
+  },
+  {
+    id: uuid.v4(),
+    isDone: true,
+    label: "b"
+  },
+  {
+    id: uuid.v4(),
+    isDone: true,
+    label: "Finish components extraction"
   }
 ];
