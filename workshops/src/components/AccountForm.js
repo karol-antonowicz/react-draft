@@ -1,6 +1,18 @@
 import React from "react";
 import { Formik } from "formik";
 import { Input } from "semantic-ui-react";
+import * as Yup from "yup";
+
+const accountFormSchema = Yup.object().shape({
+  email: Yup.string()
+    .max(100, "Too long buddy")
+    .email("Wrong email!")
+    .required("Required!"),
+  password: Yup.string()
+    .min(8, "Too short! Min 8 chars")
+    .matches(new RegExp(/[a-zA-Z]\d\s/g), "Wrong password format."),
+  phoneNumber: Yup.string().required("Required!")
+});
 
 const TextInput = props => {
   const { name, errors, touched } = props;
@@ -21,6 +33,7 @@ const AccountForm = () => (
         password: "",
         phoneNumber: ""
       }}
+      validationSchema={accountFormSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
         setTimeout(() => {
