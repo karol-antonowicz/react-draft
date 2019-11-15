@@ -43,6 +43,7 @@ const AccountForm = () => (
           <TextInput
             type="email"
             name="email"
+            placeholder="Email"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
@@ -52,9 +53,20 @@ const AccountForm = () => (
           <TextInput
             type="password"
             name="password"
+            placeholder="Password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
+            touched={touched}
+            errors={errors}
+          />
+          <TextInput
+            type="text"
+            name="phoneNumber"
+            placeholder="Phone number"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.phoneNumber}
             touched={touched}
             errors={errors}
           />
