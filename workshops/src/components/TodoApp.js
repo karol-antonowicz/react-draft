@@ -116,6 +116,10 @@ class TodoApp extends React.Component {
 
   addTodo = () => {
     // [1, 2, 3] -> [4, 1, 2, 3]
+    if (this.state.newTodoValue.length < 2) {
+      return;
+    }
+
     const newTodo = {
       id: uuid.v4(),
       isDone: false,
