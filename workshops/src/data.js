@@ -32,25 +32,4 @@ export const photos = [
   }
 ];
 
-export const todos = [
-  {
-    id: uuid.v4(),
-    isDone: true,
-    label: "Finish components extraction"
-  },
-  {
-    id: uuid.v4(),
-    isDone: false,
-    label: "a"
-  },
-  {
-    id: uuid.v4(),
-    isDone: false,
-    label: "b"
-  },
-  {
-    id: uuid.v4(),
-    isDone: false,
-    label: "Finish components extraction"
-  }
-];
+export const todos = [];

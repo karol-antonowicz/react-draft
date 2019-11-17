@@ -13,6 +13,14 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body {
+  background-color: black;
+}
+
+
+input:focus {
+  outline: none;
+}
 
 .hidden {
   display: none;
@@ -51,7 +59,7 @@ button {
   font-size: 80px;
   font-weight: 200;
   text-align: center;
-  color: #b83f45;
+  color: #ffffff;
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
@@ -166,6 +174,11 @@ button {
   appearance: none;
 }
 
+.todoList li .toggle:hover {
+cursor: pointer;
+}
+
+
 .todoList li .toggle {
   opacity: 0;
 }
@@ -197,6 +210,16 @@ button {
 .todoList li.completed label {
   color: #cdcdcd;
   text-decoration: line-through;
+}
+
+.todoList li.invisible label {
+display: none;
+background-color: red;
+}
+
+.invisible {
+  background-color: black;
+display: none;
 }
 
 .todoList li .destroy {
@@ -291,7 +314,7 @@ button {
 }
 
 .filters li a.selected {
-  border-color: rgba(175, 47, 47, 0.2);
+
 }
 
 .clearCompleted,

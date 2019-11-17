@@ -3,6 +3,7 @@ import uuid from "uuid";
 import styles from "./TodoApp.module.css";
 import { todos } from "../data";
 
+
 const Counter = props => {
   return (
     <span className={styles.todoCount}>
@@ -15,22 +16,22 @@ const Clear = props => {
   if (!props.isClearVisible) {
     return null;
   }
-  return <button className={styles.clearCompleted}>Clear completed</button>;
+  return <button onClick={() => props.clearCompleted()} className={styles.clearCompleted}>Clear completed</button>;
 };
 
-const Filters = () => {
+const Filters = props => {
   return (
     <ul className={styles.filters}>
       <li>
-        <a className={styles.selected} href="#/">
+        <a onClick={() => props.showAll()} className={styles.selected} href="#/">
           All
         </a>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <a onClick={() => props.showActive()}href="#/active">Active</a>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <a onClick={() => props.showCompleted()}href="#/completed">Completed</a>
       </li>
     </ul>
   );
@@ -40,21 +41,42 @@ const Controls = props => {
   return (
     <footer className={styles.footer}>
       <Counter itemsLeft={props.itemsLeft} />
-      <Filters />
-      <Clear isClearVisible={props.isClearVisible} />
+      <Filters 
+            showAll={props.showAll}
+            showActive={props.showActive}
+            showCompleted={props.showCompleted}
+            />
+      <Clear clearCompleted={props.clearCompleted} isClearVisible={props.isClearVisible} />
     </footer>
   );
 };
 
 const TodoItem = props => {
-  const { isDone, label, id } = props;
+  const { isDone, label, id} = props;
+
+  let whatClass =()=>{
+    if (isDone && props.selectedFilter === 'all'){
+      return styles.completed
+    } else if (!isDone && props.selectedFilter === 'all'){
+      return '' 
+    } else if (isDone && props.selectedFilter === 'active' ){
+      return styles.invisible
+    } else if (!isDone && props.selectedFilter === 'active'){
+      return ''
+    } else if (isDone && props.selectedFilter === 'completed'){
+      return styles.completed
+    } else if (!isDone && props.selectedFilter === 'completed'){
+      return styles.invisible
+    }
+    }
 
   return (
-    <li className={isDone ? styles.completed : ""}>
+    <li className={whatClass()}>
       <div className={styles.view}>
         <input
           className={styles.toggle}
           type="checkbox"
+          onClick={() => props.onTickToggle(id)}
           checked={isDone}
           readOnly
         />
@@ -77,7 +99,7 @@ const TodoList = props => {
   return (
     <ul className={styles.todoList}>
       {props.todos.map(todo => (
-        <TodoItem key={todo.id} {...todo} onDeleteTodo={props.onDeleteTodo} />
+        <TodoItem key={todo.id} {...todo} selectedFilter={props.selectedFilter} onDeleteTodo={props.onDeleteTodo} onTickToggle={props.onTickToggle} />
       ))}
     </ul>
   );
@@ -102,10 +124,10 @@ const TodoInput = props => {
   );
 };
 
-const ToggleAll = () => {
+const ToggleAll = props => {
   return (
     <Fragment>
-      <input id="toggle-all" className={styles.toggleAll} type="checkbox" />
+      <input onClick={() => props.toggleAll()} id="toggle-all" className={styles.toggleAll} type="checkbox" />
       <label htmlFor="toggle-all">Mark all as complete</label>
     </Fragment>
   );
@@ -115,7 +137,8 @@ class TodoApp extends React.Component {
   state = {
     todos,
     selectedFilter: "all",
-    newTodoValue: "Buy milk"
+    newTodoValue: "",
+    filtered:[]
   };
 
   componentDidMount() {
@@ -137,6 +160,10 @@ class TodoApp extends React.Component {
     return this.state.todos.some(todo => todo.isDone === true);
   }
 
+  get whatFilter(){
+    return this.state.selectedFilter
+  }
+
   addTodo = () => {
     // [1, 2, 3] -> [4, 1, 2, 3]
     if (this.state.newTodoValue.length < 2) {
@@ -156,13 +183,66 @@ class TodoApp extends React.Component {
   };
 
   deleteTodo = id => {
-    console.log(id);
-    // [1, 2, 3, 4, 5] -> [1, 2, 4, 5]
+
     const newTodos = this.state.todos.filter(todo => todo.id !== id);
     this.setState({
       todos: newTodos
     });
   };
+
+  tickToggle = id => {
+    const toDo = this.state.todos.find(todo => todo.id === id)
+    if (toDo.isDone === true) {
+      toDo.isDone = false
+    } else if (toDo.isDone === false) {
+      toDo.isDone = true
+    }
+    this.setState({ toDo })
+  }
+
+
+  toggleAll = () => {
+    if (this.state.todos.some(todo => todo.isDone === false)) {
+      const newTodos = this.state.todos.map(el => ({ ...el, isDone: true }))
+
+      this.setState({ todos: newTodos })
+    } else if (this.state.todos.some(todo => todo.isDone === true)) {
+      const newTodos = this.state.todos.map(el => ({ ...el, isDone: false }))
+
+      this.setState({ todos: newTodos })
+    }
+  }
+
+
+  clearCompleted = () => {
+    const notFinishedToDo = this.state.todos.filter(todo => todo.isDone === false) // tablica ze wszystkimi todosami nie zrobionymi ( one zostaną )
+    this.setState({
+      todos: notFinishedToDo
+
+    });
+
+
+  }
+
+ 
+
+showAll = () => {
+
+    this.setState({selectedFilter:'all'})
+
+
+
+  }
+  showActive = () => {
+    this.setState({selectedFilter:'active'})
+
+
+  }
+  showCompleted = () => {
+    this.setState({selectedFilter:'completed'})
+
+  }
+
 
   handleChange = newValue => {
     if (newValue.length > 40) {
@@ -173,6 +253,7 @@ class TodoApp extends React.Component {
       newTodoValue: newValue
     });
   };
+
 
   render() {
     return (
@@ -187,21 +268,25 @@ class TodoApp extends React.Component {
             />
           </header>
           <section className={styles.main}>
-            <ToggleAll />
-            <TodoList todos={this.state.todos} onDeleteTodo={this.deleteTodo} />
+            <ToggleAll toggleAll={this.toggleAll} />
+            <TodoList selectedFilter={this.whatFilter} onTickToggle={this.tickToggle} todos={this.state.todos} onDeleteTodo={this.deleteTodo} />
           </section>
           <Controls
+          showAll={this.showAll}
+          showActive={this.showActive}
+          showCompleted={this.showCompleted}
+            clearCompleted={this.clearCompleted}
             itemsLeft={this.todosLeft}
             isClearVisible={this.isClearVisible}
           />
         </section>
         <footer className={styles.info}>
-          <p>Double-click to edit a todo</p>
+          <p>Add your stuff to the list</p>
           <p>
             Template by <a href="http://sindresorhus.com">Sindre Sorhus</a>
           </p>
           <p>
-            Created by <a href="http://todomvc.com">you</a>
+            Created by <a href="https://github.com/karol-antonowicz">Karol</a>
           </p>
           <p>
             Part of <a href="http://todomvc.com">TodoMVC</a>
@@ -213,3 +298,6 @@ class TodoApp extends React.Component {
 }
 
 export default TodoApp;
+
+
+
